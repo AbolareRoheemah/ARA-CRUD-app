@@ -35,7 +35,17 @@ const init = () => {
 
     // add to dom
     elements.main.appendChild(elements.keysContainer);
-    document.body.appendChild(elements.main)
+    document.body.appendChild(elements.main);
+
+    // display on text area
+    document.querySelectorAll('.use_keyboard').forEach(element => {
+        element.addEventListener('focus', () => {
+            open(element.value, (currentValue) => {
+                element.value = currentValue
+            })
+        })
+    })
+
 }
 
 const _createKeys = () => {
@@ -176,9 +186,4 @@ const close = () => {
 
 window.addEventListener('DOMContentLoaded', () => {
     init();
-    open('trial', (currentVal) => {
-        console.log('value is now', currentVal)
-    }, (currentVal) => {
-        console.log('close function, closing value ' + currentVal)
-    });
 })
